@@ -15,6 +15,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
+    let pins = PinLocationList().pins
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         locationManager.startUpdatingLocation()
         region()
         loadDefaultLocation()
+        mapView.addAnnotations(pins)
         
     }
     
@@ -41,23 +43,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         self.mapView.showsUserLocation = true
     }
   
-    
+   
     func region()
     {
-        let location = CLLocationCoordinate2DMake(51.441463, 5.498352)
-        let region = CLCircularRegion(center: location, radius: 100, identifier: "Home")
-        mapView.removeOverlays(mapView.overlays)
-        locationManager.startMonitoring(for: region)
-        let circle = MKCircle(center: location, radius: region.radius)
-        mapView.add(circle)
-        
-        /*
-        region.notifyOnEntry = (geotification.eventType == .onEntry)
-        region.notifyOnExit = (geotification.eventType == .onExit)
-        */
+        for pin in pins{
+            let region = CLCircularRegion(center: pin.coordinate, radius: 200, identifier: pin.identifier)
+            region.notifyOnEntry = true
+            region.notifyOnExit = true
+            let circle = MKCircle(center: region.center, radius: region.radius)
+            mapView.add(circle)
+            locationManager.startMonitoring(for: region)
+            
+        }
+       
+    
     }
     
-   /* func startMonitoring() {
+    
+    
+    func startMonitoring(pin: PinLocation) {
         
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
@@ -68,19 +72,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             showAlert(withTitle: "Warning", message: "Your geotification is saved but will only be activated once you grant permission to access the device location.")
         }
         
-        let region = self.region()
-        locationManager.startMonitoring(for: region)
+    //let region = self.region(withPinLocation: pin)
+       // locationManager.startMonitoring(for: region)
     }
     
-    func stopMonitoring() {
+    func stopMonitoring(pin: PinLocation) {
         for region in locationManager.monitoredRegions {
             guard let circularRegion = region as? CLCircularRegion,
-                circularRegion.identifier == region.identifier else {continue}
+                circularRegion.identifier == pin.identifier else {continue}
             locationManager.stopMonitoring(for: circularRegion)
         }
-    } */
+    }
     
-    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let circleOverlay = overlay as? MKCircle else {return MKOverlayRenderer()}
         let circleRenderer = MKCircleRenderer(circle: circleOverlay)
         circleRenderer.fillColor = .red

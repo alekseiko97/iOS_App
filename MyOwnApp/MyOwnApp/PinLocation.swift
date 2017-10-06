@@ -21,5 +21,17 @@ class PinLocation: NSObject, MKAnnotation {
         self.title = title
         self.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
     }
+    
+    
+}
+
+class PinLocationList: NSObject {
+    
+    var pins = [PinLocation]()
+    
+    override init(){
+        pins += [PinLocation(title: "Title1", latitude: 51.441642, longitude: 5.469175)]
+        pins += [PinLocation(title: "Title2", latitude: 51.441221, longitude: 5.478515)]
+    }
 }
 

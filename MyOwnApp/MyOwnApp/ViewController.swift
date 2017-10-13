@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate{
+class ViewController: UIViewController, CLLocationManagerDelegate{
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -20,34 +20,46 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
-        region()
-        loadDefaultLocation()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestLocation()
+        addRegion()
         mapView.addAnnotations(pins)
+        DispatchQueue.main.async {
+            self.locationManager.startUpdatingLocation()
+        }
+        
+        
         
     }
     
-    func loadDefaultLocation()
-    {
-        let eindhovenCity = CLLocationCoordinate2DMake(51.441184, 5.472946)
-        let region = MKCoordinateRegionMakeWithDistance(eindhovenCity, 5000, 5000)
-        mapView.setRegion(region, animated: true)
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        locationManager.stopUpdatingLocation()
+        //locationManager.stopUpdatingLocation()
         self.mapView.showsUserLocation = true
+        if let location = locations.first
+        {
+            let region = MKCoordinateRegionMakeWithDistance(location.coordinate, 5000, 5000)
+            mapView.setRegion(region, animated: true)
+        }
     }
-  
-   
-    func region()
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Error: \(error)")
+    }
+    
+    func addRegion()
     {
         for pin in pins{
-            let region = CLCircularRegion(center: pin.coordinate, radius: 200, identifier: pin.identifier)
+            let region = CLCircularRegion(center: pin.coordinate, radius: 100, identifier: pin.identifier)
             region.notifyOnEntry = true
             region.notifyOnExit = true
             let circle = MKCircle(center: region.center, radius: region.radius)
@@ -55,34 +67,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             locationManager.startMonitoring(for: region)
             
         }
-       
-    
     }
     
     
-    
-    func startMonitoring(pin: PinLocation) {
-        
-        if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
-            showAlert(withTitle:"Error", message: "Geofencing is not supported on this device!")
-            return
-        }
-        
-        if CLLocationManager.authorizationStatus() != .authorizedAlways {
-            showAlert(withTitle: "Warning", message: "Your geotification is saved but will only be activated once you grant permission to access the device location.")
-        }
-        
-    //let region = self.region(withPinLocation: pin)
-       // locationManager.startMonitoring(for: region)
+    func showAlert(title: String, message: String)
+    {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
     }
     
-    func stopMonitoring(pin: PinLocation) {
-        for region in locationManager.monitoredRegions {
-            guard let circularRegion = region as? CLCircularRegion,
-                circularRegion.identifier == pin.identifier else {continue}
-            locationManager.stopMonitoring(for: circularRegion)
-        }
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        showAlert(title: "You entered the region", message: "Time to do the task")
+        
     }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        showAlert(title: "Your are out of the region", message: "You're not available to do this task")
+    }
+  
+   
     
      func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         guard let circleOverlay = overlay as? MKCircle else {return MKOverlayRenderer()}
@@ -92,6 +97,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
         circleRenderer.alpha = 0.5
         return circleRenderer
     }
-
 }
+
+
 

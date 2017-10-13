@@ -10,9 +10,10 @@ import Foundation
 import UIKit
 import MapKit
 
+
 class PinLocation: NSObject, MKAnnotation {
     
-    var identifier = "Pin location"
+    var identifier = "pin"
     var title: String?
     var coordinate: CLLocationCoordinate2D
     
@@ -20,9 +21,18 @@ class PinLocation: NSObject, MKAnnotation {
     {
         self.title = title
         self.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        
+        super.init()
     }
     
-    
+    func mapItem() -> MKMapItem {
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = title
+        
+        return mapItem
+    }
 }
 
 class PinLocationList: NSObject {
@@ -31,7 +41,7 @@ class PinLocationList: NSObject {
     
     override init(){
         pins += [PinLocation(title: "Title1", latitude: 51.441642, longitude: 5.469175)]
-        pins += [PinLocation(title: "Title2", latitude: 51.441221, longitude: 5.478515)]
+        pins += [PinLocation(title: "Title2", latitude: 51.438631, longitude: 5.469116)]
     }
 }
 

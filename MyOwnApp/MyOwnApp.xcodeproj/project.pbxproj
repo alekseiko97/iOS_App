@@ -10,10 +10,11 @@
 		0A9607EF5E85C23F894DA879 /* Pods_MyOwnAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE17ACE899406559D9FADBC6 /* Pods_MyOwnAppUITests.framework */; };
 		73BC327CBA55872B3D1A30DA /* Pods_MyOwnAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B1E771A746E42E6C77C7B4 /* Pods_MyOwnAppTests.framework */; };
 		F51472F71F7E41490087E05F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51472F61F7E41490087E05F /* CoreLocation.framework */; };
-		F51472FA1F7E461F0087E05F /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51472F81F7E461A0087E05F /* Geotification.swift */; };
 		F51472FE1F7E789A0087E05F /* PinLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51472FD1F7E789A0087E05F /* PinLocation.swift */; };
 		F54247181F90AEEB001E2D30 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54247171F90AEEB001E2D30 /* VCMapView.swift */; };
-		F57606181F90A3F200467770 /* GeoLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F57606171F90A3F200467770 /* GeoLocation.swift */; };
+		F576061E1F90C4C300467770 /* TestLocation2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F576061D1F90C4C300467770 /* TestLocation2.gpx */; };
+		F576061F1F90C4C300467770 /* TestLocation2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F576061D1F90C4C300467770 /* TestLocation2.gpx */; };
+		F57606201F90C4C300467770 /* TestLocation2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F576061D1F90C4C300467770 /* TestLocation2.gpx */; };
 		F58AF08D1F752AB200BC1E42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AF08C1F752AB200BC1E42 /* AppDelegate.swift */; };
 		F58AF08F1F752AB200BC1E42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AF08E1F752AB200BC1E42 /* ViewController.swift */; };
 		F58AF0921F752AB200BC1E42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58AF0901F752AB200BC1E42 /* Main.storyboard */; };
@@ -52,10 +53,9 @@
 		E1B648E46ED216B5657558F3 /* Pods-MyOwnApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOwnApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyOwnApp/Pods-MyOwnApp.release.xcconfig"; sourceTree = "<group>"; };
 		E9B933BA10B4DD99ECE9924D /* Pods-MyOwnApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOwnApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyOwnApp/Pods-MyOwnApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F51472F61F7E41490087E05F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		F51472F81F7E461A0087E05F /* Geotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Geotification.swift; path = MyOwnApp/Geotification.swift; sourceTree = SOURCE_ROOT; };
 		F51472FD1F7E789A0087E05F /* PinLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLocation.swift; sourceTree = "<group>"; };
 		F54247171F90AEEB001E2D30 /* VCMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
-		F57606171F90A3F200467770 /* GeoLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoLocation.swift; sourceTree = "<group>"; };
+		F576061D1F90C4C300467770 /* TestLocation2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestLocation2.gpx; sourceTree = "<group>"; };
 		F58AF0891F752AB100BC1E42 /* MyOwnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyOwnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58AF08C1F752AB200BC1E42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F58AF08E1F752AB200BC1E42 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -147,16 +147,15 @@
 				F5A373451F7D081B006AD171 /* MyOwnApp.entitlements */,
 				F58AF08C1F752AB200BC1E42 /* AppDelegate.swift */,
 				F58AF08E1F752AB200BC1E42 /* ViewController.swift */,
-				F57606171F90A3F200467770 /* GeoLocation.swift */,
-				F51472F81F7E461A0087E05F /* Geotification.swift */,
 				F58AF0901F752AB200BC1E42 /* Main.storyboard */,
 				F51472FD1F7E789A0087E05F /* PinLocation.swift */,
 				F58AF0931F752AB200BC1E42 /* Assets.xcassets */,
 				F58AF0951F752AB200BC1E42 /* LaunchScreen.storyboard */,
 				F58AF0981F752AB200BC1E42 /* Info.plist */,
-				F5AA989E1F879803008AFADE /* TestLocation.gpx */,
 				F5AA98A01F87DB39008AFADE /* GoogleService-Info.plist */,
 				F54247171F90AEEB001E2D30 /* VCMapView.swift */,
+				F5AA989E1F879803008AFADE /* TestLocation.gpx */,
+				F576061D1F90C4C300467770 /* TestLocation2.gpx */,
 			);
 			path = MyOwnApp;
 			sourceTree = "<group>";
@@ -323,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F58AF0971F752AB200BC1E42 /* LaunchScreen.storyboard in Resources */,
+				F576061E1F90C4C300467770 /* TestLocation2.gpx in Resources */,
 				F58AF0941F752AB200BC1E42 /* Assets.xcassets in Resources */,
 				F58AF0921F752AB200BC1E42 /* Main.storyboard in Resources */,
 			);
@@ -332,6 +332,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F576061F1F90C4C300467770 /* TestLocation2.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F57606201F90C4C300467770 /* TestLocation2.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,9 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F54247181F90AEEB001E2D30 /* VCMapView.swift in Sources */,
-				F51472FA1F7E461F0087E05F /* Geotification.swift in Sources */,
 				F51472FE1F7E789A0087E05F /* PinLocation.swift in Sources */,
-				F57606181F90A3F200467770 /* GeoLocation.swift in Sources */,
 				F58AF08F1F752AB200BC1E42 /* ViewController.swift in Sources */,
 				F58AF08D1F752AB200BC1E42 /* AppDelegate.swift in Sources */,
 			);

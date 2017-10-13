@@ -13,14 +13,15 @@ import MapKit
 
 class PinLocation: NSObject, MKAnnotation {
     
-    var identifier = "pin"
+    var identifier: String
     var title: String?
     var coordinate: CLLocationCoordinate2D
     
-    init(title: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees)
+    init(title: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, identifier: String)
     {
         self.title = title
         self.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        self.identifier = identifier
         
         super.init()
     }
@@ -40,8 +41,8 @@ class PinLocationList: NSObject {
     var pins = [PinLocation]()
     
     override init(){
-        pins += [PinLocation(title: "Title1", latitude: 51.441642, longitude: 5.469175)]
-        pins += [PinLocation(title: "Title2", latitude: 51.438631, longitude: 5.469116)]
+        pins += [PinLocation(title: "Title1", latitude: 51.441642, longitude: 5.469175, identifier: "pin1")]
+        pins += [PinLocation(title: "Title2", latitude: 51.438631, longitude: 5.469116, identifier: "pin2")]
     }
 }
 

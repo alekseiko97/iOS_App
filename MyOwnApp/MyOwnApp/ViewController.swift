@@ -23,7 +23,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         locationManager.requestLocation()
         addRegion()
         mapView.addAnnotations(pins)
@@ -36,7 +36,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
+        if status == .authorizedAlways {
             locationManager.requestLocation()
         }
     }
@@ -54,6 +54,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Error: \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, monitoringDidFailFor region: CLRegion?, withError error: Error) {
+        print("Monitoring failed for region with identifier: \(region!.identifier)")
     }
     
     func addRegion()
@@ -80,11 +84,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         showAlert(title: "You entered the region", message: "Time to do the task")
+        print("Entered")
         
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         showAlert(title: "Your are out of the region", message: "You're not available to do this task")
+        print("Exit")
     }
   
    

@@ -6,8 +6,9 @@ target 'MyOwnApp' do
   use_frameworks!
 
   # Pods for MyOwnApp
+  pod ‘Firebase’
   pod 'Firebase/Core'
-  pod 'Firebase/Database 
+  pod 'Firebase/Database’
 
   target 'MyOwnAppTests' do
     inherit! :search_paths

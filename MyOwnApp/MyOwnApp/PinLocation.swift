@@ -23,6 +23,7 @@ class PinLocation: NSObject, MKAnnotation {
         self.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
         self.identifier = identifier
         
+        
         super.init()
     }
     
@@ -37,6 +38,9 @@ class PinLocation: NSObject, MKAnnotation {
 }
 
 class PinLocationList: NSObject {
+    
+  
+    
     
     var pins = [PinLocation]()
     

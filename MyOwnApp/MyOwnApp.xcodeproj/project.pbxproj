@@ -11,6 +11,10 @@
 		73BC327CBA55872B3D1A30DA /* Pods_MyOwnAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F8B1E771A746E42E6C77C7B4 /* Pods_MyOwnAppTests.framework */; };
 		F51472F71F7E41490087E05F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51472F61F7E41490087E05F /* CoreLocation.framework */; };
 		F51472FE1F7E789A0087E05F /* PinLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51472FD1F7E789A0087E05F /* PinLocation.swift */; };
+		F53FA7A81FA1EA940091BC54 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */; };
+		F53FA7A91FA1EA940091BC54 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */; };
+		F53FA7AA1FA1EA940091BC54 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */; };
+		F53FA7AC1FA212FC0091BC54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F53FA7AB1FA212FC0091BC54 /* GoogleService-Info.plist */; };
 		F54247181F90AEEB001E2D30 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F54247171F90AEEB001E2D30 /* VCMapView.swift */; };
 		F576061E1F90C4C300467770 /* TestLocation2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F576061D1F90C4C300467770 /* TestLocation2.gpx */; };
 		F576061F1F90C4C300467770 /* TestLocation2.gpx in Resources */ = {isa = PBXBuildFile; fileRef = F576061D1F90C4C300467770 /* TestLocation2.gpx */; };
@@ -23,6 +27,9 @@
 		F58AF0A21F752AB200BC1E42 /* MyOwnAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AF0A11F752AB200BC1E42 /* MyOwnAppTests.swift */; };
 		F58AF0AD1F752AB200BC1E42 /* MyOwnAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58AF0AC1F752AB200BC1E42 /* MyOwnAppUITests.swift */; };
 		F58AF0BC1F752B2900BC1E42 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58AF0BB1F752B2900BC1E42 /* MapKit.framework */; };
+		F5D364211FA1E20700A5D137 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D364201FA1E20700A5D137 /* StatsViewController.swift */; };
+		F5D364221FA1E20700A5D137 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D364201FA1E20700A5D137 /* StatsViewController.swift */; };
+		F5D364231FA1E20700A5D137 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D364201FA1E20700A5D137 /* StatsViewController.swift */; };
 		F7D423408ECABAAB90033C13 /* Pods_MyOwnApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B1224A1A75F94BF6FCD31E /* Pods_MyOwnApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +61,8 @@
 		E9B933BA10B4DD99ECE9924D /* Pods-MyOwnApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyOwnApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyOwnApp/Pods-MyOwnApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F51472F61F7E41490087E05F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F51472FD1F7E789A0087E05F /* PinLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinLocation.swift; sourceTree = "<group>"; };
+		F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
+		F53FA7AB1FA212FC0091BC54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F54247171F90AEEB001E2D30 /* VCMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		F576061D1F90C4C300467770 /* TestLocation2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestLocation2.gpx; sourceTree = "<group>"; };
 		F58AF0891F752AB100BC1E42 /* MyOwnApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyOwnApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,7 +81,7 @@
 		F58AF0BB1F752B2900BC1E42 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		F5A373451F7D081B006AD171 /* MyOwnApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MyOwnApp.entitlements; sourceTree = "<group>"; };
 		F5AA989E1F879803008AFADE /* TestLocation.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TestLocation.gpx; sourceTree = "<group>"; };
-		F5AA98A01F87DB39008AFADE /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F5D364201FA1E20700A5D137 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		F8B1E771A746E42E6C77C7B4 /* Pods_MyOwnAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyOwnAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -144,15 +153,17 @@
 		F58AF08B1F752AB200BC1E42 /* MyOwnApp */ = {
 			isa = PBXGroup;
 			children = (
+				F53FA7AB1FA212FC0091BC54 /* GoogleService-Info.plist */,
 				F5A373451F7D081B006AD171 /* MyOwnApp.entitlements */,
 				F58AF08C1F752AB200BC1E42 /* AppDelegate.swift */,
 				F58AF08E1F752AB200BC1E42 /* ViewController.swift */,
+				F5D364201FA1E20700A5D137 /* StatsViewController.swift */,
+				F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */,
 				F58AF0901F752AB200BC1E42 /* Main.storyboard */,
 				F51472FD1F7E789A0087E05F /* PinLocation.swift */,
 				F58AF0931F752AB200BC1E42 /* Assets.xcassets */,
 				F58AF0951F752AB200BC1E42 /* LaunchScreen.storyboard */,
 				F58AF0981F752AB200BC1E42 /* Info.plist */,
-				F5AA98A01F87DB39008AFADE /* GoogleService-Info.plist */,
 				F54247171F90AEEB001E2D30 /* VCMapView.swift */,
 				F5AA989E1F879803008AFADE /* TestLocation.gpx */,
 				F576061D1F90C4C300467770 /* TestLocation2.gpx */,
@@ -323,6 +334,7 @@
 			files = (
 				F58AF0971F752AB200BC1E42 /* LaunchScreen.storyboard in Resources */,
 				F576061E1F90C4C300467770 /* TestLocation2.gpx in Resources */,
+				F53FA7AC1FA212FC0091BC54 /* GoogleService-Info.plist in Resources */,
 				F58AF0941F752AB200BC1E42 /* Assets.xcassets in Resources */,
 				F58AF0921F752AB200BC1E42 /* Main.storyboard in Resources */,
 			);
@@ -400,11 +412,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MyOwnApp/Pods-MyOwnApp-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -506,7 +520,9 @@
 				F54247181F90AEEB001E2D30 /* VCMapView.swift in Sources */,
 				F51472FE1F7E789A0087E05F /* PinLocation.swift in Sources */,
 				F58AF08F1F752AB200BC1E42 /* ViewController.swift in Sources */,
+				F5D364211FA1E20700A5D137 /* StatsViewController.swift in Sources */,
 				F58AF08D1F752AB200BC1E42 /* AppDelegate.swift in Sources */,
+				F53FA7A81FA1EA940091BC54 /* TaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,7 +530,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D364221FA1E20700A5D137 /* StatsViewController.swift in Sources */,
 				F58AF0A21F752AB200BC1E42 /* MyOwnAppTests.swift in Sources */,
+				F53FA7A91FA1EA940091BC54 /* TaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +540,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5D364231FA1E20700A5D137 /* StatsViewController.swift in Sources */,
 				F58AF0AD1F752AB200BC1E42 /* MyOwnAppUITests.swift in Sources */,
+				F53FA7AA1FA1EA940091BC54 /* TaskViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

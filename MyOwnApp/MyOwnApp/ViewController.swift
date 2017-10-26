@@ -82,8 +82,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         present(alert, animated: true, completion: nil)
     }
     
+    func showAlertWithTask(title: String, message: String)
+    {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let declineAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let acceptAction = UIAlertAction(title: "Accept", style: .default) {  (_) -> Void in
+            let vc = self.storyboard!.instantiateViewController(withIdentifier: "task") as! TaskViewController
+            self.present(vc, animated:true, completion:nil)
+        }
+        alert.addAction(acceptAction)
+        alert.addAction(declineAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        showAlert(title: "You entered the region", message: "Time to do the task")
+        showAlertWithTask(title: "You entered the region", message: "Time to do the task")
         print("Entered")
         
     }

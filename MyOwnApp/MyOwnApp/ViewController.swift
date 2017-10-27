@@ -16,7 +16,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     let pins = PinLocationList().pins
-
+    var taskVC: TaskViewController = TaskViewController()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,10 +32,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
         }
-        
-        
+        //self.navigationItem.title = "Received points: \(String(describing: taskVC.pointsReceived))"
         
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationItem.title = "Received points: \(String(describing: taskVC.pointsReceived))"
+        
+    }
+    
+    
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedAlways {
@@ -87,8 +96,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let declineAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "Accept", style: .default) {  (_) -> Void in
-            let vc = self.storyboard!.instantiateViewController(withIdentifier: "task") as! TaskViewController
-            self.present(vc, animated:true, completion:nil)
+            //let vc = self.storyboard!.instantiateViewController(withIdentifier: "task") as! TaskViewController
+            self.performSegue(withIdentifier: "segue", sender: self)
+            //self.present(vc, animated:true, completion:nil)
         }
         alert.addAction(acceptAction)
         alert.addAction(declineAction)

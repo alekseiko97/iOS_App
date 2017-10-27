@@ -39,14 +39,17 @@ class PinLocation: NSObject, MKAnnotation {
 
 class PinLocationList: NSObject {
     
-  
-    
-    
     var pins = [PinLocation]()
     
     override init(){
-        pins += [PinLocation(title: "Title1", latitude: 51.441642, longitude: 5.469175, identifier: "pin1")]
-        pins += [PinLocation(title: "Title2", latitude: 51.438631, longitude: 5.469116, identifier: "pin2")]
+        pins += [PinLocation(title: "Philips Stadion", latitude: 51.441723, longitude: 5.469444, identifier: "1")]
+        pins += [PinLocation(title: "Philips Museum", latitude: 51.439083, longitude: 5.475667, identifier: "2")]
+        pins += [PinLocation(title: "TU/e", latitude: 51.448033, longitude: 5.490986, identifier: "3")]
+        pins += [PinLocation(title: "Sint Catharinakerk", latitude: 51.437112, longitude: 5.478978, identifier: "4")]
+        pins += [PinLocation(title: "DAF Museum", latitude: 51.437148, longitude: 5.490589, identifier: "5")]
+        
+        
+        
     }
 }
 

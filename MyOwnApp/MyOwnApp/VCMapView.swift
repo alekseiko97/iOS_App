@@ -11,13 +11,13 @@ import MapKit
 
 extension ViewController: MKMapViewDelegate {
     
-    // 1
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? PinLocation {
             let identifier = "artPin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-                as? MKPinAnnotationView { // 2
+                as? MKPinAnnotationView {
                 dequeuedView.annotation = annotation
                 view = dequeuedView
             } else {
@@ -36,7 +36,7 @@ extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let location = view.annotation as! PinLocation
-        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeDriving]
+        let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
         location.mapItem().openInMaps(launchOptions: launchOptions)
     }
 }

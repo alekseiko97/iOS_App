@@ -38,6 +38,16 @@ class TaskViewController: UIViewController {
     }
     
     
+    func showAlertSuccess(title: String, message: String)
+    {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default) {  (_) -> Void in
+            self.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func showAlert(title: String, message: String)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -56,10 +66,8 @@ class TaskViewController: UIViewController {
         if userAnswer == expectedAnswer
         {
             let nrOfPoints = value["receivedPoints"] as! Int
-            self.showAlert(title: "Congratulations", message: "Your answer is correct! You've received \(String(describing: nrOfPoints)) points")
+            self.showAlertSuccess(title: "Congratulations", message: "Your answer is correct! You've received \(String(describing: nrOfPoints)) points")
             self.delegate.score += nrOfPoints
-            //let prevVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! ViewController
-            //self.navigationController?.pushViewController(prevVC, animated: true)
         }
         else
         {

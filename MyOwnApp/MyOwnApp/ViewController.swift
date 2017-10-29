@@ -91,9 +91,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let declineAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         let acceptAction = UIAlertAction(title: "Accept", style: .default) {  (_) -> Void in
-            //let vc = self.storyboard!.instantiateViewController(withIdentifier: "task") as! TaskViewController
             self.performSegue(withIdentifier: "segue", sender: self)
-            //self.present(vc, animated:true, completion:nil)
         }
         alert.addAction(acceptAction)
         alert.addAction(declineAction)

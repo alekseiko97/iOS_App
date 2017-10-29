@@ -9,23 +9,15 @@
 import UIKit
 import FirebaseDatabase
 
+
 class TaskViewController: UIViewController {
     
     
     let pins = PinLocationList().pins
-    var ref: DatabaseReference!
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-
+    var ref: DatabaseReference!    
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
-   
-    var pointsReceived: Int = 0 {
-        didSet
-        {
-            navigationItem.title = "Received points: \(pointsReceived)"
-        }
-    }
-    
-    
+    // MARK: Outlets
     @IBOutlet weak var nameTextView: UITextView!
     @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var answerField: UITextField!
@@ -45,11 +37,6 @@ class TaskViewController: UIViewController {
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "Received points: \(pointsReceived)"
-    }
-    
-   
     
     func showAlert(title: String, message: String)
     {
@@ -70,11 +57,9 @@ class TaskViewController: UIViewController {
         {
             let nrOfPoints = value["receivedPoints"] as! Int
             self.showAlert(title: "Congratulations", message: "Your answer is correct! You've received \(String(describing: nrOfPoints)) points")
-            self.pointsReceived += nrOfPoints
+            self.delegate.score += nrOfPoints
             //let prevVC = self.storyboard?.instantiateViewController(withIdentifier: "mapVC") as! ViewController
             //self.navigationController?.pushViewController(prevVC, animated: true)
-            
-            
         }
         else
         {

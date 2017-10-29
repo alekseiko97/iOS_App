@@ -56,7 +56,7 @@
         <!--Task View Controller-->
         <scene sceneID="pTZ-Ml-deG">
             <objects>
-                <viewController storyboardIdentifier="task" id="LEk-Rd-8SR" customClass="TaskViewController" customModule="MyOwnApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="taskVC" id="LEk-Rd-8SR" customClass="TaskViewController" customModule="MyOwnApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8ES-xb-K4b"/>
                         <viewControllerLayoutGuide type="bottom" id="8h0-nc-4tW"/>

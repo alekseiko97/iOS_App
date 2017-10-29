@@ -16,8 +16,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     let pins = PinLocationList().pins
-    var taskVC: TaskViewController = TaskViewController()
-    
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,16 +31,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
         }
-        //self.navigationItem.title = "Received points: \(String(describing: taskVC.pointsReceived))"
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
-        self.navigationItem.title = "Received points: \(String(describing: taskVC.pointsReceived))"
-        
+      self.navigationItem.title = "Received points: \(delegate.score)"
     }
-    
     
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

@@ -9,12 +9,9 @@
 import UIKit
 import FirebaseDatabase
 
-
 class TaskViewController: UIViewController {
     
-    
-    let pins = PinLocationList().pins
-    var ref: DatabaseReference!    
+    //var ref: DatabaseReference!
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: Outlets
@@ -25,17 +22,21 @@ class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        ref = Database.database().reference()
+        
+     /* ref = Database.database().reference()
         ref?.child("PinData").child("pin1").observeSingleEvent(of: .value, with: { (snapshot) in
         let value = snapshot.value as? NSDictionary
         self.nameTextView.text = value?["taskName"] as? String
         self.descriptionTextView.text = value?["taskDescription"] as? String
-            
-        })
+        }) */
         
+        nameTextView.text = delegate.taskName
+        descriptionTextView.text = delegate.taskDescription
+        self.delegate.isCompleted = false
         
     }
+    
+    
     
     
     func showAlertSuccess(title: String, message: String)
@@ -58,16 +59,14 @@ class TaskViewController: UIViewController {
     
     @IBAction func submitButton(_ sender: UIButton) {
         
-        ref = Database.database().reference()
-        ref?.child("PinData").child("pin1").observeSingleEvent(of: .value, with: { (snapshot) in
-        let value = snapshot.value as! [String: AnyObject]
         let userAnswer = self.answerField.text
-        let expectedAnswer = value["correctAnswer"] as! String
+        let expectedAnswer = self.delegate.correctAnswer
         if userAnswer == expectedAnswer
         {
-            let nrOfPoints = value["receivedPoints"] as! Int
+            let nrOfPoints = self.delegate.receivedPoints
             self.showAlertSuccess(title: "Congratulations", message: "Your answer is correct! You've received \(String(describing: nrOfPoints)) points")
-            self.delegate.score += nrOfPoints
+            self.delegate.score += nrOfPoints!
+            self.delegate.isCompleted = true
         }
         else
         {
@@ -75,11 +74,7 @@ class TaskViewController: UIViewController {
         }
        
     }
-        )
-    }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -25,6 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    public var isCompleted: Bool = false
+    var taskName: String?
+    var taskDescription: String?
+    var receivedPoints: Int?
+    var correctAnswer: String?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

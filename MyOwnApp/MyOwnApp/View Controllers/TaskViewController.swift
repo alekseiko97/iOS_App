@@ -11,7 +11,6 @@ import FirebaseDatabase
 
 class TaskViewController: UIViewController {
     
-    //var ref: DatabaseReference!
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     // MARK: Outlets
@@ -23,21 +22,10 @@ class TaskViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-     /* ref = Database.database().reference()
-        ref?.child("PinData").child("pin1").observeSingleEvent(of: .value, with: { (snapshot) in
-        let value = snapshot.value as? NSDictionary
-        self.nameTextView.text = value?["taskName"] as? String
-        self.descriptionTextView.text = value?["taskDescription"] as? String
-        }) */
-        
         nameTextView.text = delegate.taskName
-        descriptionTextView.text = delegate.taskDescription
         self.delegate.isCompleted = false
         
     }
-    
-    
-    
     
     func showAlertSuccess(title: String, message: String)
     {

@@ -14,7 +14,7 @@ extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? Geotification {
-            let identifier = "artPin"
+            let identifier = "Pin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
                 as? MKPinAnnotationView {

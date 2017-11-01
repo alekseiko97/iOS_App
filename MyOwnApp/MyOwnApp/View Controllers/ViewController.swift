@@ -17,25 +17,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     let locationManager = CLLocationManager()
     var geotifications: [Geotification] = []
+    var tasks: [Task] = []
     var ref: DatabaseReference!
+    
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ref = Database.database().reference()
+        ref = Database.database().reference().child("Tasks")
         mapView.delegate = self
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestAlwaysAuthorization()
         locationManager.requestLocation()
         loadAllLocations()
-        //addRegion()
-        //mapView.addAnnotations(pins)
+        loadAllTasks()
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
         }
-        
+        print("Nr. of tasks: \(tasks.count)")
         
     }
     
@@ -55,6 +56,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         {
             add(geotification: x)
         }
+    }
+    
+    func loadAllTasks()
+    {
+        ref?.observe(.childAdded, with: { (snapshot) in
+            
+            if let x = snapshot.value as? [String:Any] {
+                
+                let taskName = x["taskName"] as? String
+                let taskDescription = x["taskDescription"] as? String
+                let identifier = x["identifier"] as? Int
+                let correctAnswer = x["correctAnswer"] as? String
+                let receivedPoints = x["receivedPoints"] as? Int
+                self.tasks.append(Task(taskName: taskName!, taskDescription: taskDescription!, identifier: identifier!, correctAnswer: correctAnswer!, receivedPoints: receivedPoints!))
+                print("nr after: \(self.tasks.count)")
+                
+            }
+        })
     }
     
     
@@ -156,13 +175,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         {
             if x.identifier == region.identifier
             {
-                    ref?.child("PinData").child("pin" + x.identifier).observeSingleEvent(of: .value, with: { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    self.delegate.taskName = value?["taskName"] as? String
-                    self.delegate.taskDescription = value?["taskDescription"] as? String
-                    self.delegate.correctAnswer = value?["correctAnswer"] as? String
-                    self.delegate.receivedPoints = value?["receivedPoints"] as? Int
-                })
+                for task in tasks
+                {
+                    if String(task.identifier) == x.identifier
+                    {
+                        self.delegate.taskName = task.taskName
+                        self.delegate.taskDescription = task.taskDescription
+                        self.delegate.correctAnswer = task.correctAnswer
+                        self.delegate.receivedPoints = task.receivedPoints
+                    }
+                }
             }
         }
         
@@ -178,11 +200,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             {
                 if x.identifier == region.identifier
                 {
-                    DispatchQueue.main.async {
-                        self.remove(geotification: x)
+                    for task in tasks
+                    {
+                        if String(task.identifier) == x.identifier
+                        {
+                            self.delegate.solvedTasks.append(task)
+                        }
                     }
-                    
-                    print("\(x.identifier), \(region.identifier)")
+                        self.remove(geotification: x)
                 }
             }
         }
@@ -196,15 +221,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     
     func startMonitoring(geotification: Geotification) {
-        // 1
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             showAlert(title: "Error", message: "Monitoring is not supported on this device!")
             return
         }
         
-        // 2
         let region = self.region(withGeotification: geotification)
-        // 3
         locationManager.startMonitoring(for: region)
     }
     

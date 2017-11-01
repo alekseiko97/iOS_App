@@ -28,8 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     public var isCompleted: Bool = false
     var taskName: String?
     var taskDescription: String?
-    var receivedPoints: Int?
+    var receivedPoints: Int!
     var correctAnswer: String?
+    var solvedTasks: [Task] = []
     
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

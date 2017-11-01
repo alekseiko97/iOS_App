@@ -17,7 +17,6 @@
 		F51472F71F7E41490087E05F /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F51472F61F7E41490087E05F /* CoreLocation.framework */; };
 		F51472FE1F7E789A0087E05F /* Geotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51472FD1F7E789A0087E05F /* Geotification.swift */; };
 		F516CAF61FA8E595005B1FB3 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F516CAF51FA8E594005B1FB3 /* LocationManager.swift */; };
-		F516CAFF1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F516CAFD1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodeld */; };
 		F516CB011FA8E70A005B1FB3 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F516CB001FA8E709005B1FB3 /* CoreDataStack.swift */; };
 		F516CB041FA8EBFB005B1FB3 /* FormatDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = F516CB031FA8EBFA005B1FB3 /* FormatDisplay.swift */; };
 		F53FA7A81FA1EA940091BC54 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */; };
@@ -78,7 +77,6 @@
 		F51472F61F7E41490087E05F /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F51472FD1F7E789A0087E05F /* Geotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Geotification.swift; sourceTree = "<group>"; };
 		F516CAF51FA8E594005B1FB3 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		F516CAFE1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoonRunner.xcdatamodel; sourceTree = "<group>"; };
 		F516CB001FA8E709005B1FB3 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		F516CB031FA8EBFA005B1FB3 /* FormatDisplay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormatDisplay.swift; sourceTree = "<group>"; };
 		F53FA7A71FA1EA940091BC54 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +102,7 @@
 		F5AD6A311FA7E5ED00C21619 /* DAFMuseum.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = DAFMuseum.gpx; sourceTree = "<group>"; };
 		F5AD6A331FA7E88800C21619 /* PhilipsStadion.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PhilipsStadion.gpx; sourceTree = "<group>"; };
 		F5AD6A351FA7E89800C21619 /* Eindhoven.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Eindhoven.gpx; sourceTree = "<group>"; };
+		F5D1E8021FAA69EC00DC466D /* MoonRunner.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoonRunner.xcdatamodel; sourceTree = "<group>"; };
 		F5D364201FA1E20700A5D137 /* StatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 		F8B1E771A746E42E6C77C7B4 /* Pods_MyOwnAppTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyOwnAppTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -173,6 +172,7 @@
 				F50DDF1C1FA9F0B100BE03EE /* ArchiveTableViewController.swift */,
 				F50DDF221FAA3C4000BE03EE /* ArchiveViewController.swift */,
 				F50DDF1E1FA9F17F00BE03EE /* TableViewCell.swift */,
+				F54247171F90AEEB001E2D30 /* VCMapView.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -202,6 +202,7 @@
 		F58AF08B1F752AB200BC1E42 /* MyOwnApp */ = {
 			isa = PBXGroup;
 			children = (
+				F5D1E8011FAA69EC00DC466D /* MoonRunner.xcdatamodeld */,
 				F52750AF1FAA440C008644BC /* View Controllers */,
 				F516CB021FA8E71E005B1FB3 /* GPX Files */,
 				F5A373451F7D081B006AD171 /* MyOwnApp.entitlements */,
@@ -209,10 +210,8 @@
 				F51472FD1F7E789A0087E05F /* Geotification.swift */,
 				F50DDF201FA9F6FB00BE03EE /* Task.swift */,
 				F516CAF51FA8E594005B1FB3 /* LocationManager.swift */,
-				F54247171F90AEEB001E2D30 /* VCMapView.swift */,
 				F516CB031FA8EBFA005B1FB3 /* FormatDisplay.swift */,
 				F516CB001FA8E709005B1FB3 /* CoreDataStack.swift */,
-				F516CAFD1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodeld */,
 				F58AF0901F752AB200BC1E42 /* Main.storyboard */,
 				F50DDF1A1FA9EF6A00BE03EE /* LaunchScreen.storyboard */,
 				F58AF0931F752AB200BC1E42 /* Assets.xcassets */,
@@ -573,7 +572,6 @@
 			files = (
 				F50DDF1D1FA9F0B100BE03EE /* ArchiveTableViewController.swift in Sources */,
 				F54247181F90AEEB001E2D30 /* VCMapView.swift in Sources */,
-				F516CAFF1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodeld in Sources */,
 				F51472FE1F7E789A0087E05F /* Geotification.swift in Sources */,
 				F516CB041FA8EBFB005B1FB3 /* FormatDisplay.swift in Sources */,
 				F58AF08F1F752AB200BC1E42 /* ViewController.swift in Sources */,
@@ -880,12 +878,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F516CAFD1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodeld */ = {
+		F5D1E8011FAA69EC00DC466D /* MoonRunner.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F516CAFE1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodel */,
+				F5D1E8021FAA69EC00DC466D /* MoonRunner.xcdatamodel */,
 			);
-			currentVersion = F516CAFE1FA8E6BB005B1FB3 /* MoonRunner.xcdatamodel */;
+			currentVersion = F5D1E8021FAA69EC00DC466D /* MoonRunner.xcdatamodel */;
 			path = MoonRunner.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

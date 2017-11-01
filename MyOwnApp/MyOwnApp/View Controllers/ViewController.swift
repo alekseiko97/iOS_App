@@ -36,7 +36,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         DispatchQueue.main.async {
             self.locationManager.startUpdatingLocation()
         }
-        print("Nr. of tasks: \(tasks.count)")
         
     }
     
@@ -68,9 +67,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 let taskDescription = x["taskDescription"] as? String
                 let identifier = x["identifier"] as? Int
                 let correctAnswer = x["correctAnswer"] as? String
-                let receivedPoints = x["receivedPoints"] as? Int
-                self.tasks.append(Task(taskName: taskName!, taskDescription: taskDescription!, identifier: identifier!, correctAnswer: correctAnswer!, receivedPoints: receivedPoints!))
-                print("nr after: \(self.tasks.count)")
+                let receivedPoints = x["receivedPoints"] as! Int
+                self.tasks.append(Task(taskName: taskName!, taskDescription: taskDescription!, identifier: identifier!, correctAnswer: correctAnswer!, receivedPoints: receivedPoints))
                 
             }
         })
@@ -85,7 +83,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
-        //locationManager.stopUpdatingLocation()
         self.mapView.showsUserLocation = true
         if let location = locations.first
         {
@@ -122,7 +119,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     // MARK: Functions that update the model/associated views with geotification changes
     func add(geotification: Geotification) {
-        //geotifications.append(geotification)
         mapView.addAnnotation(geotification)
         addRadiusOverlay(forGeotification: geotification)
         startMonitoring(geotification: geotification)

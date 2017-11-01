@@ -20,10 +20,6 @@ class ArchiveTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         tableView.reloadData()
     }

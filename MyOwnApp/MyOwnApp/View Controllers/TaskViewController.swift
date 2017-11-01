@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FirebaseDatabase
 
 class TaskViewController: UIViewController {
     
@@ -51,9 +50,9 @@ class TaskViewController: UIViewController {
         let expectedAnswer = self.delegate.correctAnswer
         if userAnswer == expectedAnswer
         {
-            let nrOfPoints = self.delegate.receivedPoints
-            self.showAlertSuccess(title: "Congratulations", message: "Your answer is correct! You've received \(String(describing: nrOfPoints)) points")
-            self.delegate.score += nrOfPoints!
+            let nrOfPoints = self.delegate.receivedPoints!
+            self.showAlertSuccess(title: "Congratulations", message: "Your answer is correct! You've received \(nrOfPoints) points")
+            self.delegate.score += nrOfPoints
             self.delegate.isCompleted = true
         }
         else

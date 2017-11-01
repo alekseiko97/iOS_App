@@ -16,7 +16,7 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    private var run: Run?
+   // private var run: Run?
     private let locationManager = CLLocationManager()
     private var seconds = 0
     private var timer: Timer?

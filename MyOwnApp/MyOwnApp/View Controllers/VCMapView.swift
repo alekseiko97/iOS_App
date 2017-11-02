@@ -13,7 +13,7 @@ extension ViewController: MKMapViewDelegate {
     
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? Geotification {
+        if let annotation = annotation as? GeoLocation {
             let identifier = "Pin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
@@ -35,7 +35,7 @@ extension ViewController: MKMapViewDelegate {
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        let location = view.annotation as! Geotification
+        let location = view.annotation as! GeoLocation
         let launchOptions = [MKLaunchOptionsDirectionsModeKey: MKLaunchOptionsDirectionsModeWalking]
         location.mapItem().openInMaps(launchOptions: launchOptions)
     }

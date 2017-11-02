@@ -12,11 +12,12 @@ import CoreLocation
 import FirebaseDatabase
 
 class ViewController: UIViewController, CLLocationManagerDelegate{
-
+    
+    // MARK: Outlets
     @IBOutlet weak var mapView: MKMapView!
     
     let locationManager = CLLocationManager()
-    var geotifications: [Geotification] = []
+    var geolocations: [GeoLocation] = []
     var tasks: [Task] = []
     var ref: DatabaseReference!
     
@@ -45,15 +46,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func loadAllLocations()
     {
-        geotifications += [Geotification(title: "Philips Stadion", coordinate: CLLocationCoordinate2DMake(51.441723, 5.469444), radius: 100, identifier: "1")]
-        geotifications += [Geotification(title: "Philips Museum", coordinate: CLLocationCoordinate2DMake(51.439083, 5.475667), radius: 100, identifier: "2")]
-        geotifications += [Geotification(title: "TU/e", coordinate: CLLocationCoordinate2DMake(51.448033, 5.490986), radius: 100, identifier: "3")]
-        geotifications += [Geotification(title: "Sint Catharinakerk", coordinate: CLLocationCoordinate2DMake(51.437112, 5.478978), radius: 100, identifier: "4")]
-        geotifications += [Geotification(title: "DAF Museum", coordinate: CLLocationCoordinate2DMake(51.437148, 5.490589), radius: 100, identifier: "5")]
+        geolocations += [GeoLocation(title: "Philips Stadion", coordinate: CLLocationCoordinate2DMake(51.441723, 5.469444), radius: 100, identifier: "1")]
+        geolocations += [GeoLocation(title: "Philips Museum", coordinate: CLLocationCoordinate2DMake(51.439083, 5.475667), radius: 100, identifier: "2")]
+        geolocations += [GeoLocation(title: "TU/e", coordinate: CLLocationCoordinate2DMake(51.448033, 5.490986), radius: 100, identifier: "3")]
+        geolocations += [GeoLocation(title: "Sint Catharinakerk", coordinate: CLLocationCoordinate2DMake(51.437112, 5.478978), radius: 100, identifier: "4")]
+        geolocations += [GeoLocation(title: "DAF Museum", coordinate: CLLocationCoordinate2DMake(51.437148, 5.490589), radius: 100, identifier: "5")]
         
-        for x in geotifications
+        for x in geolocations
         {
-            add(geotification: x)
+            add(geolocation: x)
         }
     }
     
@@ -100,17 +101,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     // MARK: Map overlay functions
-    func addRadiusOverlay(forGeotification geotification: Geotification) {
-        mapView?.add(MKCircle(center: geotification.coordinate, radius: geotification.radius))
+    func addRadiusOverlay(forGeolocation geolocation: GeoLocation) {
+        mapView?.add(MKCircle(center: geolocation.coordinate, radius: geolocation.radius))
     }
     
-    func removeRadiusOverlay(forGeotification geotification: Geotification) {
+    func removeRadiusOverlay(forGeolocation geolocation: GeoLocation) {
         // Find exactly one overlay which has the same coordinates & radius to remove
         guard let overlays = mapView?.overlays else { return }
         for overlay in overlays {
             guard let circleOverlay = overlay as? MKCircle else { continue }
             let coord = circleOverlay.coordinate
-            if coord.latitude == geotification.coordinate.latitude && coord.longitude == geotification.coordinate.longitude && circleOverlay.radius == geotification.radius {
+            if coord.latitude == geolocation.coordinate.latitude && coord.longitude == geolocation.coordinate.longitude && circleOverlay.radius == geolocation.radius {
                 mapView?.remove(circleOverlay)
                 break
             }
@@ -118,26 +119,24 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     // MARK: Functions that update the model/associated views with geotification changes
-    func add(geotification: Geotification) {
-        mapView.addAnnotation(geotification)
-        addRadiusOverlay(forGeotification: geotification)
-        startMonitoring(geotification: geotification)
+    func add(geolocation: GeoLocation) {
+        mapView.addAnnotation(geolocation)
+        addRadiusOverlay(forGeolocation: geolocation)
+        startMonitoring(geolocation: geolocation)
     }
     
-    func remove(geotification: Geotification) {
-        if let indexInArray = geotifications.index(of: geotification) {
-            geotifications.remove(at: indexInArray)
+    func remove(geolocation: GeoLocation) {
+        if let indexInArray = geolocations.index(of: geolocation) {
+            geolocations.remove(at: indexInArray)
         }
-        mapView.removeAnnotation(geotification)
-        removeRadiusOverlay(forGeotification: geotification)
-        stopMonitoring(geotification: geotification)
+        mapView.removeAnnotation(geolocation)
+        removeRadiusOverlay(forGeolocation: geolocation)
+        stopMonitoring(geolocation: geolocation)
     }
     
     
-    func region(withGeotification geotification: Geotification) -> CLCircularRegion {
-        // 1
-        let region = CLCircularRegion(center: geotification.coordinate, radius: geotification.radius, identifier: geotification.identifier)
-        // 2
+    func region(withGeolocation geolocation: GeoLocation) -> CLCircularRegion {
+        let region = CLCircularRegion(center: geolocation.coordinate, radius: geolocation.radius, identifier: geolocation.identifier)
         region.notifyOnEntry = true
         region.notifyOnExit = true
         return region
@@ -167,7 +166,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         showAlertWithTask(title: "You entered the region", message: "Time to do the task")
         print("Entered")
         
-        for x in geotifications
+        for x in geolocations
         {
             if x.identifier == region.identifier
             {
@@ -192,7 +191,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         if delegate.isCompleted == true
         {
-            for x in geotifications
+            for x in geolocations
             {
                 if x.identifier == region.identifier
                 {
@@ -203,7 +202,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                             self.delegate.solvedTasks.append(task)
                         }
                     }
-                        self.remove(geotification: x)
+                    self.remove(geolocation: x)
                 }
             }
         }
@@ -216,19 +215,19 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     
     
-    func startMonitoring(geotification: Geotification) {
+    func startMonitoring(geolocation: GeoLocation) {
         if !CLLocationManager.isMonitoringAvailable(for: CLCircularRegion.self) {
             showAlert(title: "Error", message: "Monitoring is not supported on this device!")
             return
         }
         
-        let region = self.region(withGeotification: geotification)
+        let region = self.region(withGeolocation: geolocation)
         locationManager.startMonitoring(for: region)
     }
     
-    func stopMonitoring(geotification: Geotification) {
+    func stopMonitoring(geolocation: GeoLocation) {
         for region in locationManager.monitoredRegions {
-            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == geotification.identifier else { continue }
+            guard let circularRegion = region as? CLCircularRegion, circularRegion.identifier == geolocation.identifier else { continue }
             locationManager.stopMonitoring(for: circularRegion)
         }
     }

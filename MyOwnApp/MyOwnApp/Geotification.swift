@@ -19,7 +19,7 @@ struct GeoKey {
     static let identifier = "identifier"
 }
 
-class Geotification: NSObject, NSCoding, MKAnnotation {
+class GeoLocation: NSObject, NSCoding, MKAnnotation {
     
     var title: String?
     var coordinate: CLLocationCoordinate2D

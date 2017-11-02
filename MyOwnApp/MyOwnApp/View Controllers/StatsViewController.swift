@@ -15,8 +15,10 @@ class StatsViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var startBtn: UIButton!
+    @IBOutlet weak var stopBtn: UIButton!
     
-   // private var run: Run?
+    private var run: Run!
     private let locationManager = CLLocationManager()
     private var seconds = 0
     private var timer: Timer?
@@ -25,15 +27,18 @@ class StatsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
-       startRun()
+        
+        
     }
+    
+    
     
     private func startLocationUpdates() {
         locationManager.delegate = self
         locationManager.activityType = .fitness
         locationManager.distanceFilter = 10
         locationManager.startUpdatingLocation()
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func eachSecond() {
@@ -41,7 +46,21 @@ class StatsViewController: UIViewController {
         updateDisplay()
     }
     
+    @IBAction func startButton(_ sender: Any)
+    {
+        startRun()
+    }
+    
+    @IBAction func stopButton(_ sender: Any)
+    {
+        stopRun()
+        saveRun()
+        configureView()
+    }
+    
     private func startRun() {
+        startBtn.isHidden = true
+        stopBtn.isHidden = false
         mapView.removeOverlays(mapView.overlays)
         
         seconds = 0
@@ -54,6 +73,36 @@ class StatsViewController: UIViewController {
         startLocationUpdates()
     }
     
+    private func stopRun() {
+        startBtn.isHidden = false
+        stopBtn.isHidden = true
+        
+        locationManager.stopUpdatingLocation()
+    }
+    
+    private func saveRun() {
+        let newRun = Run(context: CoreDataStack.context)
+        newRun.distance = distance.value
+        newRun.duration = Int16(seconds)
+        newRun.timestamp = Date()
+        
+        for location in locationList {
+            let locationObject = Location(context: CoreDataStack.context)
+            locationObject.timestamp = location.timestamp
+            locationObject.latitude = location.coordinate.latitude
+            locationObject.longitude = location.coordinate.longitude
+            newRun.addToLocations(locationObject)
+        }
+        
+        CoreDataStack.saveContext()
+        
+        run = newRun
+        
+        
+    }
+    
+
+    
     private func updateDisplay() {
         let formattedDistance = FormatDisplay.distance(distance)
         let formattedTime = FormatDisplay.time(seconds)
@@ -62,7 +111,80 @@ class StatsViewController: UIViewController {
         timeLabel.text = "Time:  \(formattedTime)"
     }
     
+    private func configureView() {
+        let distance = Measurement(value: run.distance, unit: UnitLength.meters)
+        let seconds = Int(run.duration)
+        let formattedDistance = FormatDisplay.distance(distance)
+        let formattedTime = FormatDisplay.time(seconds)
+        
+        distanceLabel.text = "Distance:  \(formattedDistance)"
+        timeLabel.text = "Time:  \(formattedTime)"
+        
+        loadMap()
+    }
+    
+    private func mapRegion() -> MKCoordinateRegion? {
+        guard
+            let locations = run.locations,
+            locations.count > 0
+            else {
+                return nil
+        }
+        
+        let latitudes = locations.map { location -> Double in
+            let location = location as! Location
+            return location.latitude
+        }
+        
+        let longitudes = locations.map { location -> Double in
+            let location = location as! Location
+            return location.longitude
+        }
+        
+        let maxLat = latitudes.max()!
+        let minLat = latitudes.min()!
+        let maxLong = longitudes.max()!
+        let minLong = longitudes.min()!
+        
+        let center = CLLocationCoordinate2D(latitude: (minLat + maxLat) / 2,
+                                            longitude: (minLong + maxLong) / 2)
+        let span = MKCoordinateSpan(latitudeDelta: (maxLat - minLat) * 1.3,
+                                    longitudeDelta: (maxLong - minLong) * 1.3)
+        return MKCoordinateRegion(center: center, span: span)
+    }
+    
+    private func polyLine() -> MKPolyline {
+        guard let locations = run.locations else {
+            return MKPolyline()
+        }
+        
+        let coords: [CLLocationCoordinate2D] = locations.map { location in
+            let location = location as! Location
+            return CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude)
+        }
+        return MKPolyline(coordinates: coords, count: coords.count)
+    }
+    
+    private func loadMap() {
+        guard
+            let locations = run.locations,
+            locations.count > 0,
+            let region = mapRegion()
+            else {
+                let alert = UIAlertController(title: "Error",
+                                              message: "Sorry, this run has no locations saved",
+                                              preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel))
+                present(alert, animated: true)
+                return
+        }
+        
+        mapView.setRegion(region, animated: true)
+        mapView.add(polyLine())
+    }
+
 }
+
 
 extension StatsViewController: CLLocationManagerDelegate {
     
@@ -98,3 +220,5 @@ extension StatsViewController: MKMapViewDelegate {
         return renderer
     }
 }
+
+

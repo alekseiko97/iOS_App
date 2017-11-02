@@ -11,15 +11,7 @@ import UIKit
 import MapKit
 
 
-struct GeoKey {
-    static let title = "title"
-    static let latitude = "latitude"
-    static let longitude = "longitude"
-    static let radius = "radius"
-    static let identifier = "identifier"
-}
-
-class GeoLocation: NSObject, NSCoding, MKAnnotation {
+class GeoLocation: NSObject, MKAnnotation {
     
     var title: String?
     var coordinate: CLLocationCoordinate2D
@@ -36,23 +28,6 @@ class GeoLocation: NSObject, NSCoding, MKAnnotation {
         super.init()
     }
     
-    // MARK: NSCoding
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(title, forKey: GeoKey.title)
-        aCoder.encode(coordinate.latitude, forKey: GeoKey.latitude)
-        aCoder.encode(coordinate.longitude, forKey: GeoKey.longitude)
-        aCoder.encode(radius, forKey: GeoKey.radius)
-        aCoder.encode(identifier, forKey: GeoKey.identifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        title = aDecoder.decodeObject(forKey: GeoKey.title) as? String
-        let latitude = aDecoder.decodeDouble(forKey: GeoKey.latitude)
-        let longitude = aDecoder.decodeDouble(forKey: GeoKey.longitude)
-        coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        radius = aDecoder.decodeDouble(forKey: GeoKey.radius)
-        identifier = aDecoder.decodeObject(forKey: GeoKey.identifier) as! String
-    }
     
     func mapItem() -> MKMapItem {
         let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
